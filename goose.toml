@@ -1,0 +1,8 @@
+# goose.toml — eliminates typing the connection string 100 times
+[postgres]
+driver = "postgres"
+dsn = "postgres://noker:noker@localhost:5432/noker?sslmode=disable"
+
+[postgres_test]
+driver = "postgres"
+dsn = "postgres://noker:noker@localhost:5432/noker_test?sslmode=disable"

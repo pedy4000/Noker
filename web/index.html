@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Noker • Opportunity Solution Tree</title>
+
+  <!-- Core Cytoscape -->
+  <script src="https://unpkg.com/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+
+  <!-- Popper extension for tooltips -->
+  <script src="https://unpkg.com/cytoscape-popper@2.0.0/cytoscape-popper.min.js"></script>
+
+  <!-- fcose layout - FIXED with proper registration -->
+  <script src="https://unpkg.com/layout-base@2.0.1/layout-base.js"></script>
+  <script src="https://unpkg.com/cose-base@2.2.0/cose-base.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cytoscape-fcose@2.2.0/cytoscape-fcose.min.js"></script>
+
+  <!-- Tippy.js for tooltips -->
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --border: #334155;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --primary: #60a5fa;
+      --purple: #a78bfa;
+      --green: #34d399;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; }
+
+    .debug { position:fixed; top:0; left:0; right:0; background:#dc2626; color:white; text-align:center; padding:12px; font-weight:700; z-index:9999; }
+    .header { position:fixed; top:48px; left:0; right:0; height:80px; background:rgba(15,23,42,0.95); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); z-index:1000; display:flex; align-items:center; padding:0 36px; gap:32px; }
+    .logo { font-size:2rem; font-weight:800; background:linear-gradient(135deg,#60a5fa,#a78bfa); -webkit-text-fill-color:transparent; }
+    .stats { margin-left:auto; display:flex; gap:32px; font-size:1rem; color:var(--muted); }
+    .stat { display:flex; align-items:center; gap:10px; }
+    .dot { width:10px; height:10px; border-radius:50%; background:var(--green); box-shadow:0 0 12px rgba(52,211,153,0.6); animation:pulse 2.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+    #cy { width:100vw; height:calc(100vh - 128px); position:fixed; top:128px; left:0; }
+    .tooltip { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; max-width:360px; box-shadow:0 20px 50px rgba(0,0,0,0.6); font-size:0.95rem; line-height:1.5; }
+    .tooltip h4 { margin:0 0 12px; color:var(--primary); font-size:1.2rem; font-weight:600; }
+    .tooltip p { margin:8px 0; }
+    .tooltip small { color:var(--muted); font-size:0.85rem; }
+    .loading { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); font-size:1.6rem; color:var(--primary); z-index:2000; background:rgba(15,23,42,0.9); padding:32px 48px; border-radius:16px; backdrop-filter:blur(10px); }
+  </style>
+</head>
+<body>
+
+  <div class="debug">DEBUG VIEW — Not for production</div>
+  <div class="loading" id="loading">Loading opportunities...</div>
+
+  <div class="header">
+    <div class="logo">Noker</div>
+    <div class="stats">
+      <div class="stat"><div class="dot"></div> <strong id="themes">0</strong> Themes</div>
+      <div class="stat"><strong id="opps">0</strong> Opportunities</div>
+      <div class="stat"><strong id="evs">0</strong> Evidence</div>
+    </div>
+  </div>
+
+  <div id="cy"></div>
+
+  <script>
+    const API_KEY = 'noker-dev-key-2025';
+
+    // Register fcose extension — FIXED! This line was missing
+    cytoscape.use(cytoscapeFcose);
+
+    async function loadData() {
+      try {
+        const res = await fetch('/api/opportunities/recent?include_evidence=true', {
+          headers: { 'X-API-Key': API_KEY }
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const opps = await res.json();
+        document.getElementById('loading').style.display = 'none';
+
+        if (!opps || opps.length === 0) {
+          document.getElementById('cy').innerHTML = '<div style="color:#64748b;text-align:center;padding:200px;font-size:1.8rem;">No opportunities yet</div>';
+          return;
+        }
+
+        const elements = [];
+        let evidenceCount = 0;
+        const themes = new Set();
+
+        opps.forEach(op => {
+          // Theme
+          if (op.theme) {
+            themes.add(op.theme);
+            elements.push({
+              data: { id: `t-${op.theme}`, label: op.theme },
+              classes: 'theme'
+            });
+          }
+
+          // Opportunity
+          elements.push({
+            data: {
+              id: op.id,
+              label: op.struggle,
+              parent: op.theme ? `t-${op.theme}` : null,
+              full: op
+            },
+            classes: 'opportunity'
+          });
+
+          // Evidence
+          if (op.evidence && op.evidence.length > 0) {
+            op.evidence.forEach((ev, i) => {
+              evidenceCount++;
+              elements.push({
+                data: {
+                  id: `${op.id}-e-${i}`,
+                  label: ev.quote.length > 100 ? ev.quote.substring(0,100)+'...' : ev.quote,
+                  parent: op.id,
+                  full: ev
+                },
+                classes: 'evidence'
+              });
+            });
+          }
+        });
+
+        // Stats
+        document.getElementById('themes').textContent = themes.size;
+        document.getElementById('opps').textContent = opps.length;
+        document.getElementById('evs').textContent = evidenceCount;
+
+        initGraph(elements);
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('loading').innerHTML = `Error: ${err.message}`;
+      }
+    }
+
+    function initGraph(elements) {
+      const cy = cytoscape({
+        container: document.getElementById('cy'),
+        elements,
+        style: [
+          {
+            selector: 'node',
+            style: {
+              'background-color': '#1e293b',
+              'label': 'data(label)',
+              'text-wrap': 'wrap',
+              'text-max-width': 240,
+              'text-valign': 'center',
+              'text-halign': 'center',
+              'color': 'white',
+              'font-size': 13,
+              'font-weight': 500,
+              'padding': 20,
+              'shape': 'roundrectangle',
+              'border-width': 2,
+              'border-color': '#334155',
+              'z-index-compare': 'manual'
+            }
+          },
+          {
+            selector: '.theme',
+            style: {
+              'background-color': '#5b21b6',
+              'border-color': '#a78bfa',
+              'width': 360,
+              'height': 110,
+              'font-size': 20,
+              'font-weight': 700,
+              'z-index': 1
+            }
+          },
+          {
+            selector: '.opportunity',
+            style: {
+              'background-color': '#1e40af',
+              'border-color': '#60a5fa',
+              'width': 320,
+              'height': 120,
+              'z-index': 10  // Opportunity always above Theme
+            }
+          },
+          {
+            selector: '.evidence',
+            style: {
+              'background-color': '#065f46',
+              'border-color': '#34d399',
+              'width': 280,
+              'height': 90,
+              'font-size': 12,
+              'z-index': 5   // Evidence below Opportunity but visible
+            }
+          },
+          {
+            selector: ':parent',
+            style: {
+              'background-opacity': 0.12,
+              'border-width': 3,
+              'border-color': '#475569'
+            }
+          },
+          {
+            selector: 'edge',
+            style: {
+              'width': 2.5,
+              'line-color': '#475569',
+              'curve-style': 'bezier'
+            }
+          }
+        ],
+        layout: {
+          name: 'fcose',
+          quality: 'proof',
+          animate: true,
+          fit: true,
+          padding: 100,
+          nodeRepulsion: 900000,  // Stronger to prevent overlap
+          idealEdgeLength: 220,
+          nestingFactor: 2.0,     // More space between levels
+          gravity: 10,
+          animationDuration: 1200
+        },
+        wheelSensitivity: 0.15
+      });
+
+      // Tooltip - FIXED with proper popper usage
+      cy.ready(() => {
+        cy.nodes().forEach(node => {
+          const data = node.data('full');
+          if (!data) return;
+
+          const popper = node.popper({
+            content: () => {
+              const div = document.createElement('div');
+              div.className = 'tooltip';
+              div.innerHTML = `
+                <h4>${data.struggle || data.quote || 'Untitled'}</h4>
+                ${data.user_segment ? `<p><strong>Segment:</strong> ${data.user_segment}</p>` : ''}
+                ${data.theme ? `<p><strong>Theme:</strong> ${data.theme}</p>` : ''}
+                ${data.why_it_matters ? `<p><em>${data.why_it_matters}</em></p>` : ''}
+                ${data.meeting_title ? `<p><strong>Meeting:</strong> ${data.meeting_title}</p>` : ''}
+                ${data.created_at ? `<p><small>${new Date(data.created_at).toLocaleString()}</small></p>` : ''}
+              `;
+              document.body.appendChild(div);
+              return div;
+            }
+          });
+
+          const update = () => popper.update();
+          node.on('position', update);
+          cy.on('pan zoom resize', update);
+          node.on('mouseover', () => popper.show());
+          node.on('mouseout', () => popper.hide());
+        });
+      });
+
+      // Double-click to fit
+      cy.on('dbltap', () => cy.fit(cy.elements(), 100));
+    }
+
+    // Load data on page load
+    loadData();
+  </script>
+</body>
+</html>

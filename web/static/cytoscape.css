@@ -1,0 +1,8 @@
+/* web/static/cytoscape.css */
+.cy-tooltip {
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+  }

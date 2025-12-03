@@ -1,0 +1,21 @@
+env: production
+
+server:
+  enabled: true
+  port: 8080
+  api_key: "noker-dev-key-2025"  # change in prod
+
+database:
+  url: "postgres://noker:noker@postgres:5432/noker?sslmode=disable"
+
+ai:
+  enabled: True
+  provider: "openai"
+  model: "gpt-4o-mini"
+  temperature: 0.3
+  api_key: "" # set in .env
+
+queue:
+  worker_count: 1
+  poll_interval_ms: 1000
+  type: "inmemory"
