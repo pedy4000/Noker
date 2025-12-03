@@ -1,0 +1,14 @@
+{
+  "workspace": {
+    "id": "1369a5f8-7a7e-43c7-9d66-d068266ea1e9"
+  },
+  "entities": {
+    "collections": [
+      "..\\postman\\collections\\Noker.postman_collection.json"
+    ],
+    "environments": [],
+    "specs": [],
+    "flows": [],
+    "globals": []
+  }
+}

@@ -1,0 +1,924 @@
+{
+  "info": {
+    "_postman_id": "ba6ced87-944a-4d67-9f57-bb1d9839a9b7",
+    "name": "Noker",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "13169243",
+    "_collection_link": "https://troublenza.postman.co/workspace/1369a5f8-7a7e-43c7-9d66-d068266ea1e9/collection/13169243-ba6ced87-944a-4d67-9f57-bb1d9839a9b7?action=share&source=collection_link&creator=13169243"
+  },
+  "item": [
+    {
+      "name": "Create Meeting",
+      "id": "0692b039-2c97-4f40-afaa-a85313463950",
+      "request": {
+        "auth": {
+          "type": "apikey",
+          "apikey": [
+            {
+              "key": "key",
+              "value": "X-API-Key",
+              "type": "string"
+            },
+            {
+              "key": "value",
+              "value": "noker-dev-key-2025",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"Pedram Interview Follow-up\", \r\n    \"notes\": \"Dashboard slowness now officially blocks morning interviews. CTO escalated.\", \r\n    \"source\": \"manual\", \r\n    \"metadata\": {\"platform\": \"zoom\"}\r\n},\r\n    ",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/meetings",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "meetings"
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "e0a68309-4cf2-45f4-aacd-9201e89e4286",
+          "name": "202 Accepter",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Pedram Interview Follow-up\", \r\n    \"notes\": \"Dashboard slowness now officially blocks morning interviews. CTO escalated.\", \r\n    \"source\": \"manual\", \r\n    \"metadata\": {\"platform\": \"zoom\"}\r\n},\r\n    ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/meetings",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "meetings"
+              ]
+            }
+          },
+          "status": "Accepted",
+          "code": 202,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 02:49:59 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "179"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"queued\",\n    \"meeting_id\": \"e5b1e27e-38c1-46e7-9393-f891a5284492\",\n    \"message\": \"Notes received! AI is extracting opportunities in background...\",\n    \"processed_in\": \"a few seconds\"\n}"
+        },
+        {
+          "id": "da814459-f526-4aa0-9b9d-96cef248e0b0",
+          "name": "400 Bad Request",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"notes\": \"Dashboard slowness now officially blocks morning interviews. CTO escalated.\", \r\n    \"source\": \"manual\", \r\n    \"metadata\": {\"platform\": \"zoom\"}\r\n},\r\n    ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/meetings",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "meetings"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 02:54:18 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "51"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"Validation failed: 'title' is required\"\n}"
+        },
+        {
+          "id": "e891ee45-7ac5-4a69-afaf-ef6328460ea3",
+          "name": "401 Unauthorized",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Pedram Interview Follow-up\", \r\n    \"notes\": \"Dashboard slowness now officially blocks morning interviews. CTO escalated.\", \r\n    \"source\": \"manual\", \r\n    \"metadata\": {\"platform\": \"zoom\"}\r\n},\r\n    ",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/meetings",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "meetings"
+              ]
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 02:56:14 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "42"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"{\\\"error\\\": \\\"unauthorized\\\"}\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Meeting",
+      "id": "9008ec18-3112-41c6-a331-2f93c7141b94",
+      "request": {
+        "auth": {
+          "type": "apikey",
+          "apikey": [
+            {
+              "key": "value",
+              "value": "noker-dev-key-2025",
+              "type": "string"
+            },
+            {
+              "key": "key",
+              "value": "X-API-Key",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/meetings/e5b1e27e-38c1-46e7-9393-f891a5284492/status",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "meetings",
+            "e5b1e27e-38c1-46e7-9393-f891a5284492",
+            "status"
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "80c12031-fc79-4017-9399-a7cc127d0539",
+          "name": "200 OK",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/meetings/e5b1e27e-38c1-46e7-9393-f891a5284492/status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "meetings",
+                "e5b1e27e-38c1-46e7-9393-f891a5284492",
+                "status"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 02:52:16 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "245"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": \"e5b1e27e-38c1-46e7-9393-f891a5284492\",\n    \"title\": \"Pedram Interview Follow-up\",\n    \"source\": \"manual\",\n    \"metadata\": \"{\\\"platform\\\": \\\"zoom\\\"}\",\n    \"status\": \"done\",\n    \"message\": \"\",\n    \"created\": \"Dec 03 06:19\",\n    \"processed\": \"Dec 03 06:20\",\n    \"updated\": \"Dec 03 06:19\"\n}"
+        },
+        {
+          "id": "62d339ec-295d-44bb-917f-190ff3408a46",
+          "name": "404 Not Found",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/meetings/e5b1e27e-38c1-46e7-9393-f891a5284493/status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "meetings",
+                "e5b1e27e-38c1-46e7-9393-f891a5284493",
+                "status"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 02:54:54 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "30"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"Meeting not found\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Opportunities",
+      "id": "4ea218cd-c9bf-43b3-bd42-e490da21c1f4",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "apikey",
+          "apikey": [
+            {
+              "key": "value",
+              "value": "noker-dev-key-2025",
+              "type": "string"
+            },
+            {
+              "key": "key",
+              "value": "X-API-Key",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"Pedram Interview Follow-up\", \r\n    \"notes\": \"Dashboard slowness now officially blocks morning interviews. CTO escalated.\", \r\n    \"source\": \"manual\", \r\n    \"metadata\": {\"platform\": \"zoom\"}\r\n},\r\n    "
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/opportunities/c2d91415-9468-4847-b45d-a1ad67cc3ec2?include_evidence=true",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "opportunities",
+            "c2d91415-9468-4847-b45d-a1ad67cc3ec2"
+          ],
+          "query": [
+            {
+              "key": "include_evidence",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "8fc96590-68af-48ec-aef1-2cd3990ae1d1",
+          "name": "200 OK with evidence",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Pedram Interview Follow-up\", \r\n    \"notes\": \"Dashboard slowness now officially blocks morning interviews. CTO escalated.\", \r\n    \"source\": \"manual\", \r\n    \"metadata\": {\"platform\": \"zoom\"}\r\n},\r\n    "
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/opportunities/c2d91415-9468-4847-b45d-a1ad67cc3ec2?include_evidence=true",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "opportunities",
+                "c2d91415-9468-4847-b45d-a1ad67cc3ec2"
+              ],
+              "query": [
+                {
+                  "key": "include_evidence",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 02:59:01 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "1195"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": \"c2d91415-9468-4847-b45d-a1ad67cc3ec2\",\n    \"user_segment\": \"interview teams\",\n    \"struggle\": \"Analytics dashboard loads slowly\",\n    \"why\": \"Slowness affects productivity during critical interviews.\",\n    \"workaround\": \"None\",\n    \"theme\": \"performance-issues\",\n    \"evidence_count\": 3,\n    \"evidence\": [\n        {\n            \"id\": \"717495f3-eb15-45c9-a55d-ec2d818fa248\",\n            \"quote\": \"Dashboard slowness now officially blocks morning interviews.\",\n            \"context\": \"CTO escalated.\",\n            \"created\": \"Dec 03 06:26\",\n            \"meeting_id\": \"6146c42a-071b-42af-adda-7edca8c230a2\",\n            \"meeting_title\": \"Pedram Interview Follow-up\",\n            \"meeting_date\": \"Dec 03 06:26\"\n        },\n        {\n            \"id\": \"8a6c692b-021c-4942-9bd1-de86e5938d4d\",\n            \"quote\": \"Dashboard slowness now officially blocks morning interviews.\",\n            \"context\": \"CTO escalated.\",\n            \"created\": \"Dec 03 06:24\",\n            \"meeting_id\": \"36b69cd2-25f3-48c3-b751-934930015623\",\n            \"meeting_title\": \"Pedram Interview Follow-up\",\n            \"meeting_date\": \"Dec 03 06:24\"\n        },\n        {\n            \"id\": \"aac758d3-f473-44c5-834b-b47ca0fa7758\",\n            \"quote\": \"Dashboard slowness now officially blocks morning interviews.\",\n            \"context\": \"CTO escalated the issue.\",\n            \"created\": \"Dec 03 06:20\",\n            \"meeting_id\": \"e5b1e27e-38c1-46e7-9393-f891a5284492\",\n            \"meeting_title\": \"Pedram Interview Follow-up\",\n            \"meeting_date\": \"Dec 03 06:19\"\n        }\n    ],\n    \"created\": \"Dec 03 06:20\"\n}"
+        },
+        {
+          "id": "249ed2f1-17f4-4a82-9b7b-3a5197a983e2",
+          "name": "200 OK without evidence",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Pedram Interview Follow-up\", \r\n    \"notes\": \"Dashboard slowness now officially blocks morning interviews. CTO escalated.\", \r\n    \"source\": \"manual\", \r\n    \"metadata\": {\"platform\": \"zoom\"}\r\n},\r\n    "
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/opportunities/c2d91415-9468-4847-b45d-a1ad67cc3ec2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "opportunities",
+                "c2d91415-9468-4847-b45d-a1ad67cc3ec2"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 02:53:36 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "284"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": \"c2d91415-9468-4847-b45d-a1ad67cc3ec2\",\n    \"user_segment\": \"interview teams\",\n    \"struggle\": \"Analytics dashboard loads slowly\",\n    \"why\": \"Slowness affects productivity during critical interviews.\",\n    \"workaround\": \"None\",\n    \"theme\": \"performance-issues\",\n    \"evidence_count\": 1,\n    \"created\": \"Dec 03 06:20\"\n}"
+        },
+        {
+          "id": "9c00d54a-45e9-44ff-8597-e05b180552f0",
+          "name": "404 Not Found",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Pedram Interview Follow-up\", \r\n    \"notes\": \"Dashboard slowness now officially blocks morning interviews. CTO escalated.\", \r\n    \"source\": \"manual\", \r\n    \"metadata\": {\"platform\": \"zoom\"}\r\n},\r\n    "
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/opportunities/c2d91415-9468-4847-b45d-a1ad67cc3ec3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "opportunities",
+                "c2d91415-9468-4847-b45d-a1ad67cc3ec3"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 02:55:24 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "34"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"Opportunity not found\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Recent Opportunities",
+      "id": "8942bb39-5f95-4f8f-ae31-b906af8364c1",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "id": "6e63661c-6dff-420d-a435-3dce7d327f07",
+          "name": "200 OK with evidence",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Pedram Interview Follow-up\", \r\n    \"notes\": \"Dashboard slowness now officially blocks morning interviews. CTO escalated.\", \r\n    \"source\": \"manual\", \r\n    \"metadata\": {\"platform\": \"zoom\"}\r\n},\r\n    "
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/opportunities/recent?include_evidence=true",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "opportunities",
+                "recent"
+              ],
+              "query": [
+                {
+                  "key": "include_evidence",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 02:57:26 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "1197"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": \"c2d91415-9468-4847-b45d-a1ad67cc3ec2\",\n        \"user_segment\": \"interview teams\",\n        \"struggle\": \"Analytics dashboard loads slowly\",\n        \"why\": \"Slowness affects productivity during critical interviews.\",\n        \"workaround\": \"None\",\n        \"theme\": \"performance-issues\",\n        \"evidence_count\": 3,\n        \"evidence\": [\n            {\n                \"id\": \"717495f3-eb15-45c9-a55d-ec2d818fa248\",\n                \"quote\": \"Dashboard slowness now officially blocks morning interviews.\",\n                \"context\": \"CTO escalated.\",\n                \"created\": \"Dec 03 06:26\",\n                \"meeting_id\": \"6146c42a-071b-42af-adda-7edca8c230a2\",\n                \"meeting_title\": \"Pedram Interview Follow-up\",\n                \"meeting_date\": \"Dec 03 06:26\"\n            },\n            {\n                \"id\": \"8a6c692b-021c-4942-9bd1-de86e5938d4d\",\n                \"quote\": \"Dashboard slowness now officially blocks morning interviews.\",\n                \"context\": \"CTO escalated.\",\n                \"created\": \"Dec 03 06:24\",\n                \"meeting_id\": \"36b69cd2-25f3-48c3-b751-934930015623\",\n                \"meeting_title\": \"Pedram Interview Follow-up\",\n                \"meeting_date\": \"Dec 03 06:24\"\n            },\n            {\n                \"id\": \"aac758d3-f473-44c5-834b-b47ca0fa7758\",\n                \"quote\": \"Dashboard slowness now officially blocks morning interviews.\",\n                \"context\": \"CTO escalated the issue.\",\n                \"created\": \"Dec 03 06:20\",\n                \"meeting_id\": \"e5b1e27e-38c1-46e7-9393-f891a5284492\",\n                \"meeting_title\": \"Pedram Interview Follow-up\",\n                \"meeting_date\": \"Dec 03 06:19\"\n            }\n        ],\n        \"created\": \"Dec 03 06:20\"\n    }\n]"
+        },
+        {
+          "id": "84eeb926-6ff5-4996-8419-4e53a9529fbc",
+          "name": "200 OK without evidence",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Pedram Interview Follow-up\", \r\n    \"notes\": \"Dashboard slowness now officially blocks morning interviews. CTO escalated.\", \r\n    \"source\": \"manual\", \r\n    \"metadata\": {\"platform\": \"zoom\"}\r\n},\r\n    "
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/opportunities/recent",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "opportunities",
+                "recent"
+              ],
+              "query": [
+                {
+                  "key": "include_evidence",
+                  "value": "true",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 02:57:49 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "286"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": \"c2d91415-9468-4847-b45d-a1ad67cc3ec2\",\n        \"user_segment\": \"interview teams\",\n        \"struggle\": \"Analytics dashboard loads slowly\",\n        \"why\": \"Slowness affects productivity during critical interviews.\",\n        \"workaround\": \"None\",\n        \"theme\": \"performance-issues\",\n        \"evidence_count\": 3,\n        \"created\": \"Dec 03 06:20\"\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "Get Top Opportunities by Theme",
+      "id": "7074bb2d-73c4-459a-86ad-32c662a4ebd1",
+      "request": {
+        "auth": {
+          "type": "apikey",
+          "apikey": [
+            {
+              "key": "key",
+              "value": "X-API-Key",
+              "type": "string"
+            },
+            {
+              "key": "value",
+              "value": "noker-dev-key-2025",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/themes/performance-issues/top-opportunities?limit=10&include_evidence=true",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "themes",
+            "performance-issues",
+            "top-opportunities"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "10"
+            },
+            {
+              "key": "include_evidence",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "0b821b41-49ec-451d-acda-61c89f6033a9",
+          "name": "200 OK with evidence",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/themes/performance-issues/top-opportunities?limit=10&include_evidence=true",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "themes",
+                "performance-issues",
+                "top-opportunities"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "include_evidence",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 03:01:11 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "1273"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"theme_name\": \"performance-issues\",\n    \"opportunities\": [\n        {\n            \"id\": \"c2d91415-9468-4847-b45d-a1ad67cc3ec2\",\n            \"user_segment\": \"interview teams\",\n            \"struggle\": \"Analytics dashboard loads slowly\",\n            \"why\": \"Slowness affects productivity during critical interviews.\",\n            \"workaround\": \"Slowness affects productivity during critical interviews.\",\n            \"evidence_count\": 3,\n            \"evidence\": [\n                {\n                    \"id\": \"717495f3-eb15-45c9-a55d-ec2d818fa248\",\n                    \"quote\": \"Dashboard slowness now officially blocks morning interviews.\",\n                    \"context\": \"CTO escalated.\",\n                    \"created\": \"Dec 03 06:26\",\n                    \"meeting_id\": \"6146c42a-071b-42af-adda-7edca8c230a2\",\n                    \"meeting_title\": \"Pedram Interview Follow-up\",\n                    \"meeting_date\": \"Dec 03 06:26\"\n                },\n                {\n                    \"id\": \"8a6c692b-021c-4942-9bd1-de86e5938d4d\",\n                    \"quote\": \"Dashboard slowness now officially blocks morning interviews.\",\n                    \"context\": \"CTO escalated.\",\n                    \"created\": \"Dec 03 06:24\",\n                    \"meeting_id\": \"36b69cd2-25f3-48c3-b751-934930015623\",\n                    \"meeting_title\": \"Pedram Interview Follow-up\",\n                    \"meeting_date\": \"Dec 03 06:24\"\n                },\n                {\n                    \"id\": \"aac758d3-f473-44c5-834b-b47ca0fa7758\",\n                    \"quote\": \"Dashboard slowness now officially blocks morning interviews.\",\n                    \"context\": \"CTO escalated the issue.\",\n                    \"created\": \"Dec 03 06:20\",\n                    \"meeting_id\": \"e5b1e27e-38c1-46e7-9393-f891a5284492\",\n                    \"meeting_title\": \"Pedram Interview Follow-up\",\n                    \"meeting_date\": \"Dec 03 06:19\"\n                }\n            ],\n            \"created\": \"Dec 03 06:20\"\n        }\n    ]\n}"
+        },
+        {
+          "id": "da42ec79-b609-4599-821e-62b56d0cbb2b",
+          "name": "404 Not Found",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/themes/performance-issue/top-opportunities?limit=10&include_evidence=true",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "themes",
+                "performance-issue",
+                "top-opportunities"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "include_evidence",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 03:01:44 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "28"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"error\": \"Theme not found\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Slack Commands",
+      "id": "380b5451-74df-4644-8a1c-2f3d6e505981",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "id": "24121928-c7d9-4890-9572-ea6fe1b1b4db",
+          "name": "200 OK Help",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Pedram Interview Follow-up\", \r\n    \"notes\": \"Dashboard slowness now officially blocks morning interviews. CTO escalated.\", \r\n    \"source\": \"manual\", \r\n    \"metadata\": {\"platform\": \"zoom\"}\r\n},\r\n    "
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/cmd",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "cmd"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 03:02:32 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "214"
+            }
+          ],
+          "cookie": [],
+          "body": "Noker Commands\n\n• show_new_opportunities → Latest customer pains\n• themes_this_week       → Trending opportunity themes\n• help                   → This message\n\nExample: /cmd?text=show_new_opportunities"
+        },
+        {
+          "id": "a42d8122-a68e-42a7-b350-0cef9703cd04",
+          "name": "200 OK Show New Opportunities",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Pedram Interview Follow-up\", \r\n    \"notes\": \"Dashboard slowness now officially blocks morning interviews. CTO escalated.\", \r\n    \"source\": \"manual\", \r\n    \"metadata\": {\"platform\": \"zoom\"}\r\n},\r\n    "
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/cmd?text=show_new_opportunities",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "cmd"
+              ],
+              "query": [
+                {
+                  "key": "text",
+                  "value": "show_new_opportunities"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 03:03:29 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "123"
+            }
+          ],
+          "cookie": [],
+          "body": "Found 1 new opportunities in the last 24h:\n\n• *interview teams*\n  Analytics dashboard loads slowly [performance-issues]\n\n"
+        },
+        {
+          "id": "ad1c7018-05f9-4389-8e00-dc8a17e09559",
+          "name": "200 OK Themes This Week",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Pedram Interview Follow-up\", \r\n    \"notes\": \"Dashboard slowness now officially blocks morning interviews. CTO escalated.\", \r\n    \"source\": \"manual\", \r\n    \"metadata\": {\"platform\": \"zoom\"}\r\n},\r\n    "
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/cmd?text=themes_this_week",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "cmd"
+              ],
+              "query": [
+                {
+                  "key": "text",
+                  "value": "themes_this_week"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Wed, 03 Dec 2025 03:04:05 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "144"
+            }
+          ],
+          "cookie": [],
+          "body": "*Top opportunity themes this week:*\n\n1. *performance-issues* — 1 opportunities\n\nUse `/cmd?text=show_new_opportunities` to see the latest pains"
+        }
+      ]
+    }
+  ]
+}
